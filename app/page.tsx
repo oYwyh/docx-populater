@@ -109,7 +109,7 @@ export default function Home() {
             />
           </TabsContent>
           <TabsContent value="preview"><Preview docBlob={docBlob} pdfBlob={pdfBlob} /></TabsContent>
-          <TabsContent value="download"><Download docBlob={docBlob} pdfBlob={pdfBlob} /></TabsContent>
+          <TabsContent value="download"><Download docBlob={docBlob} /></TabsContent>
         </Tabs>
       )}
     </div>

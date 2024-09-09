@@ -3,11 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { DownloadIcon } from "lucide-react";
 import { saveAs } from 'file-saver';
 
-export default function Download({ docBlob, pdfBlob }: { docBlob: Blob | null, pdfBlob: Blob | null }) {
-    const handlePdfDownload = () => {
-        if (!pdfBlob) return
-        saveAs(pdfBlob, 'document.pdf')
-    }
+export default function Download({ docBlob }: { docBlob: Blob | null }) {
+    // const handlePdfDownload = () => {
+    //     if (!pdfBlob) return
+    //     saveAs(pdfBlob, 'document.pdf')
+    // }
 
     const handleDocxDownload = () => {
         if (!docBlob) return

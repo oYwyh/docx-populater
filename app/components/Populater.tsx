@@ -30,7 +30,7 @@ export default function Populater({
 
 
 
-    const handleReplacer = async (data: { [key: string]: any }) => {
+    const handleReplacer = async (data: { [key: string]: unknown }) => {
         // Replace undefined values with empty strings
         const cleanedData = Object.fromEntries(
             Object.entries(data).map(([key, value]) => [key, value ?? ""])
