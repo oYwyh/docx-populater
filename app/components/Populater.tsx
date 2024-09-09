@@ -5,14 +5,13 @@ import { Input } from "@/components/ui/input"
 import Docxtemplater from "docxtemplater"
 import { useForm } from "react-hook-form"
 import { useEffect } from 'react'
-import { convertToPdf, normalizeData } from "@/lib/funcs"
+import { convertToPdf } from "@/lib/funcs"
 import { useQuery } from "@tanstack/react-query"
 import { useToast } from "@/hooks/use-toast"
 import { ToastAction } from "@radix-ui/react-toast"
 
 export default function Populater({
     doc,
-    setDoc,
     setTab,
     placeholders,
     formData,
@@ -22,7 +21,6 @@ export default function Populater({
     setPdfBlob
 }: {
     doc: Docxtemplater,
-    setDoc: React.Dispatch<React.SetStateAction<Docxtemplater | null>>,
     setTab: React.Dispatch<React.SetStateAction<string>>,
     placeholders: string[],
     formData: { [key: string]: string },
@@ -36,16 +34,10 @@ export default function Populater({
 
 
 
-    const handleReplacer = async (data: { [key: string]: any }) => {
-        // Replace undefined values with empty strings
+    const handleReplacer = async (data: { [key: string]: unknown }) => {
         const cleanedData = Object.fromEntries(
             Object.entries(data).map(([key, value]) => [key, value ?? ""])
         );
-
-        console.log(cleanedData);
-        /*
-            Object { last_name: "sadasd", first_name: "sad", description: "asd", phone: "" }
-        */
 
         doc.render(cleanedData);
 
@@ -80,6 +72,7 @@ export default function Populater({
             title: 'Success',
             description: 'Placeholders populated successfully',
             duration: 5000,
+            className: 'bg-black',
             action: <ToastAction onClick={() => setTab("preview")} altText="Preview">Preview</ToastAction>
         })
     }, [isSuccess])

@@ -1,14 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Button } from "@/components/ui/button"
+import { useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import PizZip from 'pizzip'
 import Docxtemplater from 'docxtemplater'
 import Populater from '@/app/components/Populater'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { convertToPdf } from '@/lib/funcs'
 import Preview from '@/app/components/Preview'
 import Download from '@/app/components/Download'
 
@@ -20,7 +18,7 @@ export default function Home() {
   const [formData, setFormData] = useState<{ [key: string]: string }>({}); // state to store form values
   const [tab, setTab] = useState<string>("replacer");
 
-  const onTabChange = (value: any) => {
+  const onTabChange = (value: string) => {
     setTab(value);
   }
 
@@ -102,7 +100,6 @@ export default function Home() {
           <TabsContent value="replacer">
             <Populater
               doc={doc}
-              setDoc={setDoc}
               formData={formData}
               setFormData={setFormData}
               docBlob={docBlob}

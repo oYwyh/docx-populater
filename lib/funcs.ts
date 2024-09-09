@@ -20,10 +20,3 @@ export const convertToPdf = async (blob: Blob) => {
         console.error('Failed to convert document');
     }
 };
-
-export function normalizeData(data: any) {
-    return Object.keys(data).reduce((acc, key) => {
-        acc[key] = data[key] === undefined ? '' : data[key];
-        return acc;
-    }, {} as any);
-}

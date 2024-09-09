@@ -1,12 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useEffect } from "react";
 
 export default function Preview({ pdfBlob, docBlob }: { pdfBlob: Blob | null, docBlob: Blob | null }) {
-
-    useEffect(() => {
-        console.log(pdfBlob)
-    }, [pdfBlob])
-
     return (
         <Card>
             <CardHeader>
