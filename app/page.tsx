@@ -9,6 +9,7 @@ import Populater from '@/app/components/Populater'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Preview from '@/app/components/Preview'
 import Download from '@/app/components/Download'
+import { useToast } from '@/hooks/use-toast'
 
 export default function Home() {
   const [placeholders, setPlaceholders] = useState<string[]>(['first_name', 'last_name', 'phone', 'description'])
@@ -17,6 +18,8 @@ export default function Home() {
   const [pdfBlob, setPdfBlob] = useState<Blob | null>(null)
   const [formData, setFormData] = useState<{ [key: string]: string }>({}); // state to store form values
   const [tab, setTab] = useState<string>("replacer");
+
+  const { toast } = useToast()
 
   const onTabChange = (value: string) => {
     setTab(value);
@@ -59,6 +62,15 @@ export default function Home() {
     setFormData({})
 
     const file = e.target.files?.[0]
+    if (file?.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+      toast({
+        variant: 'destructive',
+        title: 'Faliure',
+        description: 'File type must be .docx',
+        duration: 5000,
+      })
+      return;
+    }
     if (!file) return
     const arrayBuffer = await file.arrayBuffer()
     const uint8Array = new Uint8Array(arrayBuffer)
