@@ -7,6 +7,13 @@ import { useForm } from "react-hook-form"
 import { useEffect } from 'react'
 import { useToast } from "@/hooks/use-toast"
 import { ToastAction } from "@radix-ui/react-toast"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { CircleAlert } from "lucide-react"
 
 export default function Populater({
     doc,
@@ -77,7 +84,17 @@ export default function Populater({
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Populater</CardTitle>
+                <div className="flex flex-row gap-2 items-center">
+                    <CardTitle>Populater</CardTitle>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger><CircleAlert size={18} /></TooltipTrigger>
+                            <TooltipContent>
+                                <p>This app detects placeholder which are rounded with &#123;curly brackets&#125; <br /> if a field left empty it will not be populated</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                </div>
                 <CardDescription>Populate placeholders with values</CardDescription>
             </CardHeader>
             <CardContent>

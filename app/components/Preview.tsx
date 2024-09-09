@@ -8,8 +8,8 @@ export default function Preview({ pdfBlob, docBlob }: { pdfBlob: Blob | null, do
                 <CardDescription>Preview your document here</CardDescription>
             </CardHeader>
             <CardContent>
-                {docBlob ?
-                    <embed className="w-full h-[600px]" src={URL.createObjectURL(docBlob)} />
+                {pdfBlob && docBlob ?
+                    <embed className="w-full h-[600px]" src={URL.createObjectURL(pdfBlob)} />
                     : (
                         <p className="text-center">No document uploaded</p>
                     )}
