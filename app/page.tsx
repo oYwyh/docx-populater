@@ -103,7 +103,6 @@ export default function Home() {
               formData={formData}
               setFormData={setFormData}
               docBlob={docBlob}
-              setPdfBlob={setPdfBlob}
               setDocBlob={setDocBlob}
               setTab={setTab}
               placeholders={placeholders}

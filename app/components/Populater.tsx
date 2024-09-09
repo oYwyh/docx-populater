@@ -5,8 +5,6 @@ import { Input } from "@/components/ui/input"
 import Docxtemplater from "docxtemplater"
 import { useForm } from "react-hook-form"
 import { useEffect } from 'react'
-import { convertToPdf } from "@/lib/funcs"
-import { useQuery } from "@tanstack/react-query"
 import { useToast } from "@/hooks/use-toast"
 import { ToastAction } from "@radix-ui/react-toast"
 
@@ -18,7 +16,6 @@ export default function Populater({
     setFormData,
     docBlob,
     setDocBlob,
-    setPdfBlob
 }: {
     doc: Docxtemplater,
     setTab: React.Dispatch<React.SetStateAction<string>>,
@@ -27,7 +24,6 @@ export default function Populater({
     setFormData: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>,
     docBlob: Blob | null,
     setDocBlob: React.Dispatch<React.SetStateAction<Blob | null>>,
-    setPdfBlob: React.Dispatch<React.SetStateAction<Blob | null>>
 }) {
     const form = useForm()
     const { toast } = useToast()
