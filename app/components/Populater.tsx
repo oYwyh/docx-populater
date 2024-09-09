@@ -34,7 +34,8 @@ export default function Populater({
 
 
 
-    const handleReplacer = async (data: { [key: string]: unknown }) => {
+    const handleReplacer = async (data: { [key: string]: any }) => {
+        // Replace undefined values with empty strings
         const cleanedData = Object.fromEntries(
             Object.entries(data).map(([key, value]) => [key, value ?? ""])
         );
@@ -50,32 +51,32 @@ export default function Populater({
     };
 
 
-    const { data: pdfBlob, isLoading, isSuccess } = useQuery({
-        queryKey: ['convert'],
-        queryFn: async () => convertToPdf(docBlob as Blob),
-        enabled: !!docBlob
-    })
+    // const { data: pdfBlob, isLoading, isSuccess } = useQuery({
+    //     queryKey: ['convert'],
+    //     queryFn: async () => convertToPdf(docBlob as Blob),
+    //     enabled: !!docBlob
+    // })
 
-    useEffect(() => {
-        if (!pdfBlob) return
-        setPdfBlob(pdfBlob)
-    }, [pdfBlob])
+    // useEffect(() => {
+    //     if (!pdfBlob) return
+    //     setPdfBlob(pdfBlob)
+    // }, [pdfBlob])
 
     const handleInputChange = (name: string, value: string) => {
         setFormData((prev) => ({ ...prev, [name]: value }))
     }
 
     useEffect(() => {
-        if (!isSuccess) return;
+        if (!docBlob) return;
         toast({
             variant: 'default',
             title: 'Success',
             description: 'Placeholders populated successfully',
             duration: 5000,
             className: 'bg-black',
-            action: <ToastAction onClick={() => setTab("preview")} altText="Preview">Preview</ToastAction>
+            action: <ToastAction onClick={() => setTab("download")} altText="Download">Download</ToastAction>
         })
-    }, [isSuccess])
+    }, [docBlob])
 
     return (
         <Card>
@@ -144,13 +145,13 @@ export default function Populater({
                                 return null; // Avoid rendering anything outside the div
                             })}
                         </div>
-                        <Button className="w-full" type="submit" disabled={isLoading || (pdfBlob != null && docBlob != null)}>
+                        <Button className="w-full" type="submit" disabled={docBlob != null}>
                             Replace
                         </Button>
                     </form>
                 </Form>
 
             </CardContent>
-        </Card>
+        </Card >
     )
 }
